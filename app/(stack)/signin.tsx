@@ -17,6 +17,7 @@ import { useRouter } from "expo-router";
 import { Input } from "@ui-kitten/components";
 import { StatusBar } from "expo-status-bar";
 import styles from "@/config/styles";
+import { appRoutes, authRoutes } from "@/config/routes";
 
 export default function SignInScreen() {
   const { width } = useWindowDimensions();
@@ -111,7 +112,12 @@ export default function SignInScreen() {
               borderRadius: 10,
               alignItems: "center",
             }}
-            onPress={() => router.push({ pathname: "otpcode" })}
+            onPress={() =>
+              router.push({
+                pathname: appRoutes.otp,
+                params: { nextScreen: authRoutes.home },
+              })
+            }
           >
             <Text style={{ color: "white", fontFamily: "Bold", fontSize: 16 }}>
               Se connecter
