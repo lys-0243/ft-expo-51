@@ -52,10 +52,12 @@ const styles = StyleSheet.create({
   input: {
     paddingVertical: 8,
     borderColor: colors.lightGray,
-    borderBottomWidth:1,
-    width: width - 60,
+    borderWidth:1,
+    borderRadius:8,
+    width: width - 40,
+    paddingLeft:10,
     color: colors.lightGray,
-    fontSize: 18,
+    fontSize: 14,
     fontFamily: "Medium",
   },
   inputTitle: {

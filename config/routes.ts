@@ -1,3 +1,5 @@
+import Assistance from "@/app/(drawer)/assistance";
+
 export const appRoutes = {
     onboard: "onboarding",
     login: "signin",
@@ -8,21 +10,32 @@ export const appRoutes = {
   };
   
   export const authRoutes = {
-    home: "HomeScreen",
-    chat: "ChatScreen",
-    community: "CommunityScreen",
-    president: "PresidentScreen",
-    userProfile: "UserProfileScreen",
-    newContent: "NewContentScreen",
+    home: "home",
+    chat: "chat",
+    community: "community",
+    president: "president",
+    userProfile: "profile",
+    newContent: "newContent",
   };
   
   export const drawerRoutes = {
-    news: "NewsScreen",
-    petition: "PetitionScreen",
-    ministere: "MinistereScreen",
-    ressources: "RessourcesScreen",
-    offre: "OfferScreen",
-    guichet: "GuichetScreen",
-    assistance: "AssistanceScreen",
+    home: "(tabs)",
+    assistance: "assistance",
+    ministeres: "ministeres",
+    ressources: "ressources",
+    offres: "offres",
+    guichet: "guichet",
+    petitions: "petitions",
+    news: "news",
   };
   
+  export const screenTitles = {
+    home: "Accueil",
+    news: "Actualités",
+    petition: "Pétitions",
+    ministere: "Ministères",
+    ressources: "Ressources",
+    offre: "Offres",
+    guichet: "Guichet Unique",
+    assistance: "Assistance",
+  };

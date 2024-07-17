@@ -29,14 +29,3 @@ export default [
     },
   ];
   
-  export const screenTitles = {
-    home: "Accueil",
-    news: "Actualités",
-    petition: "Pétitions",
-    ministere: "Ministères",
-    ressources: "Ressources",
-    offre: "Offres",
-    guichet: "Guichet Unique",
-    assistance: "Assistance",
-  };
-  

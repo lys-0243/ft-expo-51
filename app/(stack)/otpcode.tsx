@@ -14,6 +14,7 @@ import React, { useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import colors from "@/config/colors";
 import { StatusBar } from "expo-status-bar";
+import { appRoutes, authRoutes } from "@/config/routes";
 
 export default function OTPCodeScreen() {
   const { width } = useWindowDimensions();
@@ -95,7 +96,7 @@ export default function OTPCodeScreen() {
               }}
               onPress={() => {
                 router.push({
-                  pathname: nextScreen,
+                  pathname: authRoutes.home,
                 });
               }}
             >
