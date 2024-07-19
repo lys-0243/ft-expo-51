@@ -7,6 +7,7 @@ export const appRoutes = {
     otp: "otpcode",
     successSignUp: "signup_success",
     userFav: "user_preferences",
+    setPassword: "set_password",
   };
   
   export const authRoutes = {
@@ -38,4 +39,5 @@ export const appRoutes = {
     offre: "Offres",
     guichet: "Guichet Unique",
     assistance: "Assistance",
+    logout:"Déconnexion"
   };

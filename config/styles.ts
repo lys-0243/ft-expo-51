@@ -141,6 +141,33 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  
+ 
+  checkboxBase: {
+    width: 18,
+    height: 18,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 4,
+    backgroundColor: colors.lightGray40,
+  },
+  checkboxChecked: {
+    backgroundColor: "#44B461",
+  },
+  checkBlueBg: {
+    // backgroundColor: colors.primary,
+    padding: 4,
+    borderRadius: 8,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  checkGrayBg: {
+    padding: 4,
+    borderRadius: 8,
+    flexDirection: "row",
+
+    alignItems: "center",
+  },
 });
 
 export default styles;

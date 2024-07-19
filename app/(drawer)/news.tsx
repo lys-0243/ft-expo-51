@@ -3,7 +3,14 @@ import React from "react";
 
 export default function News() {
   return (
-    <View>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: "white",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Text>news</Text>
     </View>
   );

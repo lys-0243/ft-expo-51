@@ -63,6 +63,7 @@ export default function OTPCodeScreen() {
           >
             Confirmez votre numéro
           </Text>
+          <Text>{nextScreen}</Text>
 
           <Text style={{ fontFamily: "Regular" }}>
             Entrez le code à 6 chiffres envoyé au numéro indiqué lors de
@@ -96,7 +97,7 @@ export default function OTPCodeScreen() {
               }}
               onPress={() => {
                 router.push({
-                  pathname: authRoutes.home,
+                  pathname: nextScreen as string,
                 });
               }}
             >

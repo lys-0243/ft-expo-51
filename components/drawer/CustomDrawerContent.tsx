@@ -16,16 +16,19 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import colors from "@/config/colors";
 import { Octicons } from "@expo/vector-icons";
+import { appRoutes, screenTitles } from "@/config/routes";
+import { useRouter } from "expo-router";
 
 const CustomDrawerContent = (props: any) => {
   const { width } = useWindowDimensions();
   const { top, bottom } = useSafeAreaInsets();
+  const router = useRouter();
   return (
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView
         {...props}
         scrollEnabled={false}
-        contentContainerStyle={{}}
+        contentContainerStyle={{ backgroundColor: "#fff" }}
       >
         <View
           style={{
@@ -72,8 +75,8 @@ const CustomDrawerContent = (props: any) => {
         }}
       >
         <DrawerItem
-          label="Déconnexion"
-          onPress={() => {}}
+          label={screenTitles.logout}
+          onPress={() => router.replace(appRoutes.login)}
           style={{
             backgroundColor: colors.secondary,
           }}

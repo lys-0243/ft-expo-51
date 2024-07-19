@@ -4,18 +4,27 @@ import {
   Pressable,
   StyleSheet,
   useWindowDimensions,
+  Modal,
+  Alert,
 } from "react-native";
 import React from "react";
 import { Ionicons, FontAwesome6 } from "@expo/vector-icons";
 import colors from "@/config/colors";
 import styles from "@/config/styles";
-import { Button, Card, Modal } from "@ui-kitten/components";
+import { useNavigation } from "expo-router";
+import { DrawerActions } from "@react-navigation/native";
+import ModalComponent from "./Modal";
 
-export default function Header() {
+export default function Header({ screenTitle }: { screenTitle: String }) {
   const [modalOpen, setModalOpen] = React.useState(false);
+  const [modalVisible, setModalVisible] = React.useState(false);
+
   const { width, height } = useWindowDimensions();
+  const navigation = useNavigation();
+
   return (
     <>
+      {modalVisible && <ModalComponent modalVisible={modalOpen} />}
       <View
         style={{
           flexDirection: "row",
@@ -27,14 +36,21 @@ export default function Header() {
           backgroundColor: "white",
         }}
       >
-        <Pressable>
-          <Ionicons name="menu" size={28} color={colors.darkGray} />
-        </Pressable>
+        <View style={{ flexDirection: "row", alignItems: "center", gap: 14 }}>
+          <Pressable
+            onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+          >
+            <Ionicons name="menu" size={28} color={colors.darkGray} />
+          </Pressable>
+          <Text style={{ fontFamily: "Medium", fontSize: 20 }}>
+            {screenTitle}
+          </Text>
+        </View>
         <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
           <Ionicons name="search" size={28} color={colors.lightGray} />
           <Ionicons name="notifications" size={28} color={colors.secondary} />
 
-          <Pressable onPress={() => setModalOpen(true)}>
+          <Pressable onPress={() => setModalVisible(!modalVisible)}>
             <FontAwesome6
               name="circle-plus"
               size={40}
@@ -43,17 +59,6 @@ export default function Header() {
           </Pressable>
         </View>
       </View>
-
-      <Modal
-        visible={modalOpen}
-        backdropStyle={{ ...css.backdrop, height: height }}
-        onBackdropPress={() => setModalOpen(false)}
-      >
-        <Card disabled={true} style={{ height: "auto", width: width - 80 }}>
-          <Text>Laissez votre voix s'exprimer 😻</Text>
-          <Button onPress={() => setModalOpen(false)}>Nouveau Post</Button>
-        </Card>
-      </Modal>
     </>
   );
 }

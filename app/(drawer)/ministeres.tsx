@@ -3,7 +3,14 @@ import React from "react";
 
 export default function Ministeres() {
   return (
-    <View>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: "white",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Text>Ministeres</Text>
     </View>
   );

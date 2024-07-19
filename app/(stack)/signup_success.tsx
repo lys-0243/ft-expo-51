@@ -83,12 +83,12 @@ export default function SignupSuccess() {
             borderRadius: 10,
             alignItems: "center",
           }}
-          onPress={() => router.push({ pathname: appRoutes.userFav })}
+          onPress={() => router.push({ pathname: appRoutes.setPassword })}
         >
           <Text
             style={{ color: colors.primary, fontFamily: "Bold", fontSize: 16 }}
           >
-            Continuer
+            Suivant
           </Text>
         </TouchableOpacity>
       </View>

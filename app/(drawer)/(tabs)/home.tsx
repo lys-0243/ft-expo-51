@@ -9,6 +9,7 @@ import Categories from "@/components/Categories";
 import Forum from "@/components/Forum";
 import Petitions from "@/components/Petions";
 import HomeNewsTimeline from "@/components/Post/HomeNewsTimeline";
+import { screenTitles } from "@/config/routes";
 
 export default function Home() {
   return (
@@ -20,7 +21,7 @@ export default function Home() {
     >
       <StatusBar style="dark" translucent={false} backgroundColor="white" />
 
-      {/* <Header /> */}
+      <Header screenTitle={screenTitles.home} />
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ gap: -10, paddingHorizontal: 20 }}>
@@ -49,6 +50,17 @@ export default function Home() {
         </View>
         <HomeNewsTimeline />
       </ScrollView>
+
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: "white",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Text>HomeScreen</Text>
+      </View>
     </SafeAreaView>
   );
 }
