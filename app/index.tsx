@@ -50,11 +50,13 @@ export default function HomeScreen() {
         </Text>
 
         <View style={{ marginBottom: 50 }}>
-          <Link href={{ pathname: "onboarding" }} asChild>
+          <Link href="home" asChild>
+            {/* <Link href={{ pathname: "onboarding" }} asChild> */}
             <Pressable
               style={{
                 ...styles.btnPrimary,
               }}
+              // onPress={() => router.push("home")}
             >
               <Text style={styles.textBtn}>Commencer</Text>
             </Pressable>

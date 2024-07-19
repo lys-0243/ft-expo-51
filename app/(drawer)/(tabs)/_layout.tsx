@@ -55,6 +55,7 @@ export default function Layout() {
               )}
             </View>
           ),
+          tabBarStyle: { display: "none" },
         }}
       />
 
@@ -126,6 +127,15 @@ export default function Layout() {
               )}
             </View>
           ),
+          tabBarStyle: { display: "none" },
+        }}
+      />
+
+      <Tabs.Screen
+        name={authRoutes.inChat}
+        options={{
+          href: null,
+          tabBarStyle: { display: "none" },
         }}
       />
     </Tabs>

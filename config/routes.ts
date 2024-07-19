@@ -17,6 +17,7 @@ export const appRoutes = {
     president: "president",
     userProfile: "profile",
     newContent: "newContent",
+    inChat: "inChat",
   };
   
   export const drawerRoutes = {

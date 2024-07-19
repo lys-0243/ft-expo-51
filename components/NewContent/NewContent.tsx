@@ -17,6 +17,7 @@ import Animated, {
 import PostBtn from "./PostBtn";
 import NewPostForm from "./NewPostForm";
 import NewPetitonForm from "./NewPetitonForm";
+import { AntDesign } from "@expo/vector-icons";
 
 const PostAction = [{ title: "Nouveau Post" }, { title: "Nouvelle Pétition" }];
 
@@ -54,6 +55,25 @@ export default function BottomSheet({ isOpen, toggleSheet, duration = 300 }) {
         }}
         style={[sheetStyles.sheet, sheetStyle, backgroundColorSheetStyle]}
       >
+        <Animated.View
+          style={{
+            width: "100%",
+            flexDirection: "row",
+            justifyContent: "flex-end",
+          }}
+        >
+          <Pressable
+            onPress={toggleSheet}
+            style={{
+              borderWidth: 1,
+              borderColor: colors.secondary,
+              borderRadius: 50,
+              padding: 5,
+            }}
+          >
+            <AntDesign name="closecircle" size={16} color={colors.lightGray} />
+          </Pressable>
+        </Animated.View>
         <Animated.View>
           <Animated.Text
             style={{
