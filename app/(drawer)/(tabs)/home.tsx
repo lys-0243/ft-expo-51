@@ -37,7 +37,7 @@ export default function Home() {
               color: colors.darkGray,
             }}
           >
-            Que voulez-vous savoir ?
+            Découvrez les actualités et les pétitions près de chez vous
           </Text>
         </View>
         <Caroussel />

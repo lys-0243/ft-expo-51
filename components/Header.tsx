@@ -14,17 +14,19 @@ import styles from "@/config/styles";
 import { useNavigation } from "expo-router";
 import { DrawerActions } from "@react-navigation/native";
 import ModalComponent from "./Modal";
+import Animated, { useSharedValue } from "react-native-reanimated";
+import BottomSheet from "./NewContent/NewContent";
 
 export default function Header({ screenTitle }: { screenTitle: String }) {
-  const [modalOpen, setModalOpen] = React.useState(false);
-  const [modalVisible, setModalVisible] = React.useState(false);
-
-  const { width, height } = useWindowDimensions();
   const navigation = useNavigation();
+  const isOpen = useSharedValue(false);
+
+  const toggleSheet = () => {
+    isOpen.value = !isOpen.value;
+  };
 
   return (
     <>
-      {modalVisible && <ModalComponent modalVisible={modalOpen} />}
       <View
         style={{
           flexDirection: "row",
@@ -50,7 +52,7 @@ export default function Header({ screenTitle }: { screenTitle: String }) {
           <Ionicons name="search" size={28} color={colors.lightGray} />
           <Ionicons name="notifications" size={28} color={colors.secondary} />
 
-          <Pressable onPress={() => setModalVisible(!modalVisible)}>
+          <Pressable onPress={toggleSheet}>
             <FontAwesome6
               name="circle-plus"
               size={40}
@@ -59,15 +61,8 @@ export default function Header({ screenTitle }: { screenTitle: String }) {
           </Pressable>
         </View>
       </View>
+
+      <BottomSheet isOpen={isOpen} toggleSheet={toggleSheet} />
     </>
   );
 }
-
-const css = StyleSheet.create({
-  container: {
-    minHeight: 192,
-  },
-  backdrop: {
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-  },
-});
