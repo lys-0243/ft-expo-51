@@ -10,16 +10,17 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import colors from "@/config/colors";
 import { StatusBar } from "expo-status-bar";
-import { appRoutes, authRoutes } from "@/config/routes";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { authRoutes, publicRoutes } from "@/config/routes";
 
-export default function OTPCodeScreen() {
+export default function OTPCodeScreen({ route, navigation }: any) {
   const { width } = useWindowDimensions();
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
-  const { nextScreen } = useLocalSearchParams();
+  const { nextScreen } = route.params;
 
   const inputs = [];
 
@@ -30,6 +31,19 @@ export default function OTPCodeScreen() {
     // Move focus to the next box if the current one has a value
     if (value && index < newOtp.length - 1) {
       inputs[index + 1].focus();
+    }
+  };
+
+  const handleLogin = async () => {
+    console.log(nextScreen);
+    try {
+      console.log("Log in");
+      await AsyncStorage.setItem("isAuthenticated", "1");
+      nextScreen == authRoutes.home
+        ? navigation.reset(authRoutes.home)
+        : navigation.navigate(publicRoutes.successSignUp);
+    } catch (e) {
+      console.log("error", e);
     }
   };
 
@@ -63,7 +77,6 @@ export default function OTPCodeScreen() {
           >
             Confirmez votre numéro
           </Text>
-          <Text>{nextScreen}</Text>
 
           <Text style={{ fontFamily: "Regular" }}>
             Entrez le code à 6 chiffres envoyé au numéro indiqué lors de
@@ -95,11 +108,7 @@ export default function OTPCodeScreen() {
                 borderRadius: 10,
                 alignItems: "center",
               }}
-              onPress={() => {
-                router.push({
-                  pathname: nextScreen as string,
-                });
-              }}
+              onPress={handleLogin}
             >
               <Text
                 style={{ color: "white", fontFamily: "Bold", fontSize: 16 }}

@@ -31,6 +31,10 @@ export default [
   
 export  const userProfileMenu = [
     {
+      title: "Mes Publications",
+      uri: "",
+    },
+    {
       title: "Réglages",
       uri: "",
     },

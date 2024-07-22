@@ -1,68 +1,99 @@
-import {
-  View,
-  Text,
-  Pressable,
-  StyleSheet,
-  useWindowDimensions,
-  Modal,
-  Alert,
-} from "react-native";
+import { View, Text, Pressable, StyleSheet } from "react-native";
 import React from "react";
 import { Ionicons, FontAwesome6 } from "@expo/vector-icons";
 import colors from "@/config/colors";
-import styles from "@/config/styles";
 import { useNavigation } from "expo-router";
+import ModalComponent from "./NewContent/Modal";
+import { screenTitles } from "@/config/routes";
+import { StatusBar } from "expo-status-bar";
 import { DrawerActions } from "@react-navigation/native";
-import ModalComponent from "./Modal";
-import Animated, { useSharedValue } from "react-native-reanimated";
-import BottomSheet from "./NewContent/NewContent";
+import styles from "@/config/styles";
 
-export default function Header({ screenTitle }: { screenTitle: String }) {
-  const navigation = useNavigation();
-  const isOpen = useSharedValue(false);
+export default function Header({ sceenName }: { sceenName: string }) {
+  const [modalVisible, setModalVisible] = React.useState(false);
 
-  const toggleSheet = () => {
-    isOpen.value = !isOpen.value;
-  };
+  const accepTable = [
+    screenTitles.home,
+    screenTitles.news,
+    screenTitles.petition,
+  ];
 
   return (
     <>
+      <StatusBar
+        style="light"
+        translucent={false}
+        backgroundColor={colors.primary}
+      />
+
       <View
         style={{
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
-          ...styles.shadow,
-          paddingHorizontal: 20,
+          paddingHorizontal: 15,
           paddingVertical: 10,
           backgroundColor: "white",
+          ...styles.shadow,
         }}
       >
         <View style={{ flexDirection: "row", alignItems: "center", gap: 14 }}>
-          <Pressable
-            onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-          >
-            <Ionicons name="menu" size={28} color={colors.darkGray} />
-          </Pressable>
           <Text style={{ fontFamily: "Medium", fontSize: 20 }}>
-            {screenTitle}
+            {sceenName}
           </Text>
         </View>
-        <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-          <Ionicons name="search" size={28} color={colors.lightGray} />
-          <Ionicons name="notifications" size={28} color={colors.secondary} />
+        <View style={{ flexDirection: "row", alignItems: "center", gap: 18 }}>
+          <Ionicons name="search" size={24} color={colors.lightGray} />
+          <View>
+            <Ionicons name="notifications" size={24} color={colors.lightGray} />
+            <View
+              style={{
+                position: "absolute",
+                backgroundColor: colors.secondary,
+                borderRadius: 50,
+                width: 14,
+                height: 14,
+                justifyContent: "center",
+                alignSelf: "flex-end",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={{
+                  fontFamily: "Bold",
+                  fontSize: 12,
+                  color: "white",
 
-          <Pressable onPress={toggleSheet}>
-            <FontAwesome6
-              name="circle-plus"
-              size={40}
-              color={colors.lightBlue}
-            />
-          </Pressable>
+                  textAlign: "center",
+                }}
+              >
+                4
+              </Text>
+            </View>
+          </View>
+
+          {accepTable.includes(sceenName) && (
+            <Pressable onPress={() => setModalVisible(!modalVisible)}>
+              <FontAwesome6
+                name="circle-plus"
+                size={24}
+                color={colors.lightBlue}
+              />
+            </Pressable>
+          )}
         </View>
       </View>
 
-      <BottomSheet isOpen={isOpen} toggleSheet={toggleSheet} />
+      {modalVisible && <ModalComponent modalVisible={modalVisible} />}
     </>
   );
 }
+
+const css = StyleSheet.create({
+  container: {
+    minHeight: 192,
+  },
+  backdrop: {
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+});

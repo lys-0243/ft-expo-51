@@ -64,23 +64,15 @@ export default function Layout() {
         options={{
           tabBarIcon: ({ focused }) => (
             <View
-              style={
-                focused
-                  ? {
-                      ...css.iconTabStyle,
-                      ...css.shadow,
-                      backgroundColor: colors.secondary,
-                    }
-                  : {
-                      ...css.iconTabStyle,
-                      ...css.shadow,
-                      backgroundColor: colors.lightBlue,
-                    }
-              }
+              style={{
+                ...css.iconTabStyle,
+                ...css.shadow,
+                backgroundColor: colors.lightBlue,
+              }}
             >
               <Image
                 source={require("@/assets/img/tab/fatshi.png")}
-                style={{ height: 60, width: 60 }}
+                style={{ height: 50, width: 50 }}
               />
             </View>
           ),
@@ -132,7 +124,7 @@ export default function Layout() {
       />
 
       <Tabs.Screen
-        name={authRoutes.inChat}
+        name={authRoutes.chatDetails}
         options={{
           href: null,
           tabBarStyle: { display: "none" },
@@ -145,9 +137,7 @@ export default function Layout() {
 const css = StyleSheet.create({
   tabBottomStyle: {
     backgroundColor: "#f8f8f8",
-    borderRadius: 15,
-    height: 60,
-
+    height: 50,
     justifyContent: "center",
   },
   shadow: {
@@ -172,9 +162,8 @@ const css = StyleSheet.create({
   },
   iconTabStyle: {
     borderRadius: 9999,
-    width: 60,
-    height: 60,
-    right: 10,
+    width: 50,
+    height: 50,
     position: "absolute",
     bottom: 10,
     justifyContent: "center",

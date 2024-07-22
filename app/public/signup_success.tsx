@@ -9,10 +9,10 @@ import {
 } from "react-native";
 import React from "react";
 import colors from "@/config/colors";
-import { appRoutes } from "@/config/routes";
+import { publicRoutes } from "@/config/routes";
 import { useRouter } from "expo-router";
 
-export default function SignupSuccess() {
+export default function SignupSuccess({ navigation }: any) {
   const { width } = useWindowDimensions();
   const router = useRouter();
 
@@ -83,7 +83,7 @@ export default function SignupSuccess() {
             borderRadius: 10,
             alignItems: "center",
           }}
-          onPress={() => router.push({ pathname: appRoutes.setPassword })}
+          onPress={() => navigation.navigate(publicRoutes.setPassword)}
         >
           <Text
             style={{ color: colors.primary, fontFamily: "Bold", fontSize: 16 }}

@@ -7,31 +7,41 @@ import {
   TouchableOpacity,
   Pressable,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { AntDesign } from "@expo/vector-icons";
 import colors from "@/config/colors";
 import { userProfileMenu } from "@/config/constants";
 import ProfileMenu from "@/components/ProfileMenu";
 import { useRouter } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { publicRoutes } from "@/config/routes";
 
-export default function Profile() {
-  const router = useRouter();
+export default function UserProfile({ navigation }: any) {
+  const handleLogout = async () => {
+    await AsyncStorage.removeItem("isAuthenticated");
+    navigation.navigate(publicRoutes.index);
+  };
   return (
     <>
-      <StatusBar style="light" />
+      <StatusBar
+        style="light"
+        translucent={false}
+        backgroundColor={colors.primary}
+      />
 
       <ImageBackground
         source={require("@/assets/img/users/cover.png")}
         style={{
-          height: 300,
+          height: 280,
           flexDirection: "column",
           justifyContent: "space-evenly",
           padding: 20,
+          paddingTop: 0,
         }}
       >
         <Pressable
-          onPress={() => router.back()}
+          onPress={() => navigation.goBack()}
           style={{
             flexDirection: "row",
             gap: 15,
@@ -113,6 +123,42 @@ export default function Profile() {
           {userProfileMenu.map((item) => (
             <ProfileMenu title={item.title} uri={item.uri} key={item.title} />
           ))}
+        </View>
+
+        <View
+          style={{
+            borderRadius: 10,
+            marginTop: 10,
+            marginBottom: 20,
+          }}
+        >
+          <TouchableOpacity
+            style={{
+              paddingHorizontal: 20,
+              flexDirection: "row",
+              paddingVertical: 16,
+              justifyContent: "space-between",
+            }}
+            onPress={handleLogout}
+          >
+            <Text
+              style={{
+                color: colors.secondary,
+                fontFamily: "Bold",
+                fontSize: 16,
+              }}
+            >
+              Déconnexion
+            </Text>
+            <AntDesign name="right" size={18} color={colors.darkGray} />
+          </TouchableOpacity>
+          <View
+            style={{
+              height: 1,
+              backgroundColor: colors.lightGray40,
+              marginHorizontal: 20,
+            }}
+          ></View>
         </View>
       </ScrollView>
     </>

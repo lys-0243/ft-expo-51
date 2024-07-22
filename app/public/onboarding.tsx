@@ -14,6 +14,7 @@ import NextButton from "@/components/parts/NextButton";
 import colors from "@/config/colors";
 import { StatusBar } from "expo-status-bar";
 import { Link, router } from "expo-router";
+import { publicRoutes } from "@/config/routes";
 
 export default function OnBoardingScreen({ navigation }: any) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -28,7 +29,7 @@ export default function OnBoardingScreen({ navigation }: any) {
     if (currentIndex < slides.length - 1) {
       slidesRef.current.scrollToIndex({ index: currentIndex + 1 });
     } else {
-      router.push("signin");
+      navigation.push(publicRoutes.login);
     }
   };
 
@@ -64,19 +65,17 @@ export default function OnBoardingScreen({ navigation }: any) {
         dataLength={slides.length}
       />
 
-      <Link href={{ pathname: "signin" }} asChild>
-        <Pressable>
-          <Text
-            style={{
-              color: colors.danger,
-              textAlign: "center",
-              fontFamily: "Bold",
-            }}
-          >
-            Sauter
-          </Text>
-        </Pressable>
-      </Link>
+      <Pressable onPress={() => navigation.push(publicRoutes.login)}>
+        <Text
+          style={{
+            color: colors.danger,
+            textAlign: "center",
+            fontFamily: "Bold",
+          }}
+        >
+          Sauter
+        </Text>
+      </Pressable>
     </View>
   );
 }

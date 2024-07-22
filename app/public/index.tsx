@@ -10,9 +10,11 @@ import { StatusBar } from "expo-status-bar";
 import colors from "@/config/colors";
 import { Link, useRouter } from "expo-router";
 import styles from "@/config/styles";
+import { publicRoutes } from "@/config/routes";
 
-export default function HomeScreen() {
+export default function PublicHomeScreen({ navigation }: any) {
   const router = useRouter();
+
   return (
     <ImageBackground
       source={require("@/assets/img/splash.png")}
@@ -50,17 +52,14 @@ export default function HomeScreen() {
         </Text>
 
         <View style={{ marginBottom: 50 }}>
-          <Link href="home" asChild>
-            {/* <Link href={{ pathname: "onboarding" }} asChild> */}
-            <Pressable
-              style={{
-                ...styles.btnPrimary,
-              }}
-              // onPress={() => router.push("home")}
-            >
-              <Text style={styles.textBtn}>Commencer</Text>
-            </Pressable>
-          </Link>
+          <Pressable
+            style={{
+              ...styles.btnPrimary,
+            }}
+            onPress={() => navigation.push(publicRoutes.onboard)}
+          >
+            <Text style={styles.textBtn}>Commencer</Text>
+          </Pressable>
         </View>
       </View>
     </ImageBackground>

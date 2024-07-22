@@ -16,7 +16,7 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import colors from "@/config/colors";
 import { Octicons } from "@expo/vector-icons";
-import { appRoutes, screenTitles } from "@/config/routes";
+import { appRoutes, authRoutes, screenTitles } from "@/config/routes";
 import { useRouter } from "expo-router";
 
 const CustomDrawerContent = (props: any) => {
@@ -36,6 +36,8 @@ const CustomDrawerContent = (props: any) => {
             height: "auto",
             alignItems: "center",
             paddingBottom: 15,
+            borderTopEndRadius: 20,
+            borderTopStartRadius: 20,
           }}
         >
           <Image
@@ -57,6 +59,7 @@ const CustomDrawerContent = (props: any) => {
               paddingVertical: 5,
               borderRadius: 5,
             }}
+            onPress={() => router.push(authRoutes.userProfile)}
           >
             <Text style={{ fontFamily: "Medium", color: "#fff" }}>
               Editer le profil

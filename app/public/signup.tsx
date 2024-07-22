@@ -1,42 +1,26 @@
 import {
+  View,
+  Text,
+  StyleSheet,
   SafeAreaView,
   ScrollView,
-  StyleSheet,
-  Text,
   Image,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
   useWindowDimensions,
-  View,
   TextInput,
+  TouchableWithoutFeedback,
+  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import colors from "@/config/colors";
-import { AntDesign, Entypo, Feather, FontAwesome6 } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
-import { Input } from "@ui-kitten/components";
 import { StatusBar } from "expo-status-bar";
 import styles from "@/config/styles";
-import { appRoutes, authRoutes } from "@/config/routes";
+import { publicRoutes } from "@/config/routes";
+import { useRouter } from "expo-router";
+import { AntDesign, Entypo, FontAwesome6 } from "@expo/vector-icons";
 
-export default function SignInScreen() {
+export default function SignUpScreen({ navigation }: any) {
   const { width } = useWindowDimensions();
-  const [secureTextEntry, setSecureTextEntry] = React.useState(true);
   const router = useRouter();
-
-  const toggleSecureEntry = (): void => {
-    setSecureTextEntry(!secureTextEntry);
-  };
-
-  const renderIcon = (props: any): React.ReactElement => (
-    <TouchableWithoutFeedback onPress={toggleSecureEntry}>
-      <Feather
-        name={secureTextEntry ? "eye-off" : "eye"}
-        size={24}
-        color={colors.lightGray}
-      />
-    </TouchableWithoutFeedback>
-  );
 
   return (
     <SafeAreaView style={css.container}>
@@ -68,12 +52,12 @@ export default function SignInScreen() {
           <Text
             style={{ fontFamily: "Bold", fontSize: 24, color: colors.primary }}
           >
-            Connexion
+            Inscrivez-vous et rejoignez la communauté
           </Text>
 
           <View style={{ gap: 1 }}>
             <Text style={{ fontFamily: "Regular" }}>
-              Content de vous revoir!
+              Heureux de vous compter parmi nous
             </Text>
             <Text style={{ fontFamily: "Regular" }}>
               Veuillez entrer vos coordonnées.
@@ -81,27 +65,18 @@ export default function SignInScreen() {
           </View>
         </View>
 
-        <View style={{ marginVertical: 30, gap: 12 }}>
+        <View style={{ marginVertical: 30, gap: 8 }}>
           <TextInput
-            placeholder="Email"
-            keyboardType="email-address"
+            placeholder="Téléphone"
+            keyboardType="default"
             style={{ marginVertical: 10, ...styles.input }}
-            autoComplete="email"
           />
-          <View>
-            <TextInput
-              placeholder="Mot de passe"
-              keyboardType="default"
-              style={{ marginVertical: 10, ...styles.input }}
-              autoComplete="email"
-            />
-          </View>
 
           <TouchableWithoutFeedback>
             <Text
               style={{ color: colors.gray, fontFamily: "Bold", fontSize: 14 }}
             >
-              Mot de passe oublié ?
+              J'accepte les termes et conditions
             </Text>
           </TouchableWithoutFeedback>
 
@@ -113,14 +88,13 @@ export default function SignInScreen() {
               alignItems: "center",
             }}
             onPress={() =>
-              router.push({
-                pathname: appRoutes.otp,
-                params: { nextScreen: authRoutes.home },
+              navigation.push(publicRoutes.otp, {
+                nextScreen: publicRoutes.successSignUp,
               })
             }
           >
             <Text style={{ color: "white", fontFamily: "Bold", fontSize: 16 }}>
-              Se connecter
+              Valider
             </Text>
           </TouchableOpacity>
         </View>
@@ -145,7 +119,7 @@ export default function SignInScreen() {
             <Text
               style={{ fontFamily: "Medium", fontSize: 14, color: colors.gray }}
             >
-              Ou connectez-vous avec
+              Ou s'inscrire avec
             </Text>
             <Text
               style={{
@@ -230,10 +204,10 @@ export default function SignInScreen() {
             <Text
               style={{ fontFamily: "Medium", fontSize: 14, color: colors.gray }}
             >
-              Vous n'avez pas de compte ?
+              Avez-vous déjà un compte ?
             </Text>
             <TouchableOpacity
-              onPress={() => router.push({ pathname: "signup" })}
+              onPress={() => navigation.push(publicRoutes.login)}
             >
               <Text
                 style={{
@@ -242,7 +216,7 @@ export default function SignInScreen() {
                   color: colors.primary,
                 }}
               >
-                S'inscrire
+                Se connecter
               </Text>
             </TouchableOpacity>
           </View>
@@ -265,6 +239,7 @@ const css = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     alignItems: "center",
+
     flexDirection: "row",
     justifyContent: "center",
     gap: 10,

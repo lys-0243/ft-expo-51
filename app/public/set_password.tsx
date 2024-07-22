@@ -6,20 +6,19 @@ import {
   StyleSheet,
   useWindowDimensions,
   ScrollView,
-  TouchableWithoutFeedback,
   TextInput,
   Pressable,
 } from "react-native";
 import React, { useState } from "react";
 import colors from "@/config/colors";
-import { appRoutes, authRoutes, drawerRoutes } from "@/config/routes";
+import { authRoutes } from "@/config/routes";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import styles from "@/config/styles";
 import { CheckBoxStandard } from "@/components/CheckBoxStandard";
 import { Ionicons } from "@expo/vector-icons";
 
-export default function SetPassword() {
+export default function SetPassword({ navigation }: any) {
   const { width } = useWindowDimensions();
   const router = useRouter();
   const [checked, setChecked] = useState(false);
@@ -112,11 +111,7 @@ export default function SetPassword() {
               borderRadius: 10,
               alignItems: "center",
             }}
-            onPress={() =>
-              router.push({
-                pathname: authRoutes.home,
-              })
-            }
+            onPress={() => navigation.navigate(authRoutes.home)}
           >
             <Text style={{ color: "white", fontFamily: "Bold", fontSize: 16 }}>
               Enregistrer

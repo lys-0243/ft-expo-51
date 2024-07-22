@@ -1,24 +1,24 @@
 import {
-  View,
-  Text,
-  StyleSheet,
   SafeAreaView,
   ScrollView,
+  StyleSheet,
+  Text,
   Image,
-  useWindowDimensions,
-  TextInput,
-  TouchableWithoutFeedback,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  useWindowDimensions,
+  View,
+  TextInput,
 } from "react-native";
 import React from "react";
 import colors from "@/config/colors";
+import { AntDesign, Entypo, FontAwesome6 } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import styles from "@/config/styles";
-import { appRoutes, authRoutes } from "@/config/routes";
-import { useRouter } from "expo-router";
-import { AntDesign, Entypo, FontAwesome6 } from "@expo/vector-icons";
+import { publicRoutes, authRoutes } from "@/config/routes";
 
-export default function SignUpScreen() {
+export default function SignInScreen({ navigation }: any) {
   const { width } = useWindowDimensions();
   const router = useRouter();
 
@@ -52,12 +52,12 @@ export default function SignUpScreen() {
           <Text
             style={{ fontFamily: "Bold", fontSize: 24, color: colors.primary }}
           >
-            Inscrivez-vous et rejoignez la communauté
+            Connexion
           </Text>
 
           <View style={{ gap: 1 }}>
             <Text style={{ fontFamily: "Regular" }}>
-              Heureux de vous compter parmi nous
+              Content de vous revoir!
             </Text>
             <Text style={{ fontFamily: "Regular" }}>
               Veuillez entrer vos coordonnées.
@@ -65,18 +65,27 @@ export default function SignUpScreen() {
           </View>
         </View>
 
-        <View style={{ marginVertical: 30, gap: 8 }}>
+        <View style={{ marginVertical: 30, gap: 12 }}>
           <TextInput
-            placeholder="Téléphone"
-            keyboardType="default"
+            placeholder="Email"
+            keyboardType="email-address"
             style={{ marginVertical: 10, ...styles.input }}
+            autoComplete="email"
           />
+          <View>
+            <TextInput
+              placeholder="Mot de passe"
+              keyboardType="default"
+              style={{ marginVertical: 10, ...styles.input }}
+              autoComplete="email"
+            />
+          </View>
 
           <TouchableWithoutFeedback>
             <Text
               style={{ color: colors.gray, fontFamily: "Bold", fontSize: 14 }}
             >
-              J'accepte les termes et conditions
+              Mot de passe oublié ?
             </Text>
           </TouchableWithoutFeedback>
 
@@ -88,14 +97,13 @@ export default function SignUpScreen() {
               alignItems: "center",
             }}
             onPress={() =>
-              router.push({
-                pathname: appRoutes.otp,
-                params: { nextScreen: appRoutes.successSignUp },
+              navigation.push(publicRoutes.otp, {
+                nextScreen: authRoutes.home,
               })
             }
           >
             <Text style={{ color: "white", fontFamily: "Bold", fontSize: 16 }}>
-              Valider
+              Se connecter
             </Text>
           </TouchableOpacity>
         </View>
@@ -120,7 +128,7 @@ export default function SignUpScreen() {
             <Text
               style={{ fontFamily: "Medium", fontSize: 14, color: colors.gray }}
             >
-              Ou s'inscrire avec
+              Ou connectez-vous avec
             </Text>
             <Text
               style={{
@@ -205,9 +213,11 @@ export default function SignUpScreen() {
             <Text
               style={{ fontFamily: "Medium", fontSize: 14, color: colors.gray }}
             >
-              Avez-vous déjà un compte ?
+              Vous n'avez pas de compte ?
             </Text>
-            <TouchableOpacity onPress={() => router.push(appRoutes.login)}>
+            <TouchableOpacity
+              onPress={() => navigation.push(publicRoutes.signup)}
+            >
               <Text
                 style={{
                   fontFamily: "Bold",
@@ -215,7 +225,7 @@ export default function SignUpScreen() {
                   color: colors.primary,
                 }}
               >
-                Se connecter
+                S'inscrire
               </Text>
             </TouchableOpacity>
           </View>
@@ -238,7 +248,6 @@ const css = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     alignItems: "center",
-
     flexDirection: "row",
     justifyContent: "center",
     gap: 10,

@@ -5,52 +5,40 @@ import {
   TextInput,
   ScrollView,
   SafeAreaView,
-  Image,
 } from "react-native";
 import React, { useEffect } from "react";
 import colors from "@/config/colors";
 import { AntDesign } from "@expo/vector-icons";
-import { useNavigation, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { chats } from "@/config/constants";
 import ChatComponent from "@/components/chat/ChatComponent";
 
-export default function Chat() {
+export default function ChatScreen({ navigation }: any) {
   const router = useRouter();
-  const navigation = useNavigation();
-  // const [focus, setFocus] = React.useState(false);
-
-  // useEffect(() => {
-  //   if (focus) {
-  //     navigation.setOptions({
-  //       tabBarStyle: { display: "none" },
-  //     });
-  //   }
-  //   if (!focus) {
-  //     navigation.setOptions({
-  //       tabBarStyle: { display: "flex" },
-  //     });
-  //   }
-  // }, [focus]);
 
   return (
     <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
-      <StatusBar translucent style="light" />
+      <StatusBar
+        style="light"
+        translucent={false}
+        backgroundColor={colors.primary}
+      />
 
       <View
         style={{
           width: "100%",
           backgroundColor: colors.primary,
-          height: 100,
+          height: "auto",
           flexDirection: "row",
           alignItems: "center",
           paddingHorizontal: 20,
           justifyContent: "space-between",
-          paddingTop: 30,
+          paddingVertical: 20,
         }}
       >
         <Pressable
-          onPress={() => router.back()}
+          onPress={() => navigation.goBack()}
           style={{
             flexDirection: "row",
             gap: 15,
@@ -59,7 +47,7 @@ export default function Chat() {
           <AntDesign name="left" size={24} color="white" />
         </Pressable>
         <Text style={{ color: "#fff", fontFamily: "Bold", fontSize: 24 }}>
-          Discussions
+          Conversations
         </Text>
       </View>
       <ScrollView

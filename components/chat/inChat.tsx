@@ -13,6 +13,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { ScrollView } from "react-native-gesture-handler";
 import { chatMessages } from "@/config/constants";
 import { authRoutes } from "@/config/routes";
+import { StatusBar } from "expo-status-bar";
 
 export default function inChat() {
   const router = useRouter();
@@ -20,15 +21,21 @@ export default function inChat() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+      <StatusBar
+        style="light"
+        translucent={false}
+        backgroundColor={colors.primary}
+      />
+
       <View
         style={{
           width: "100%",
           backgroundColor: colors.primary,
-          height: 100,
+          height: "auto",
           flexDirection: "row",
           alignItems: "center",
           paddingHorizontal: 20,
-          paddingTop: 30,
+          paddingVertical: 20,
           gap: 20,
         }}
       >
@@ -61,16 +68,18 @@ export default function inChat() {
                       backgroundColor: colors.lightGray40,
                       padding: 10,
                       maxWidth: "80%",
+                      minWidth: "auto",
                       borderRadius: 20,
                       borderBottomLeftRadius: 0,
+                      alignSelf: "flex-end",
                     }
                   : {
                       backgroundColor: colors.primary,
                       padding: 10,
                       maxWidth: "80%",
+                      minWidth: "auto",
                       borderRadius: 20,
                       borderBottomRightRadius: 0,
-                      alignSelf: "flex-end",
                     }
               }
             >
@@ -78,7 +87,7 @@ export default function inChat() {
                 style={
                   chat.isMe
                     ? {
-                        color: colors.darkGray,
+                        color: colors.primary,
                         fontFamily: "Regular",
                         fontSize: 14,
                       }
